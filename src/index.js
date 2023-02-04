@@ -24,12 +24,13 @@ function onInput(e){
         return 
     };   
 
-    API.AxioSearch(inputValue).then((data) => {
+    API.AxioSearch(inputValue).then(({hits}) => {
         
         // const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
         // const markupForOne= createMarkup(data);
         
-        console.log(data);
+        // console.log(data);
+        console.log(createMarkup(hits[0]));
         
         
         // if (data.length > 10) {
@@ -46,20 +47,53 @@ function onInput(e){
             
         };
         
-        function createMarkup(data){
-            return data
-        .map(({ name, capital, population, flags, languages}) => {
+        function createMarkup({ webformatURL, tags, likes, views, comments, downloads}) {
             return `
-            <div class="countrie">
-            <h2 class="countrie-card-titel"> <img src="${flags.svg}" alt="" width="70" height="50"> ${name.official}</h2>
-            <p>Capital: ${capital}</p>
-            <p>Population: ${population}</p>
-            <p>Languages: ${Object.values(languages)}</p>
+            <div class="photo-card">
+            <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+            <div class="info">
+              <p class="info-item">
+                <b>Likes</b>${likes}
+              </p>
+              <p class="info-item">
+                <b>Views</b>${views}
+              </p>
+              <p class="info-item">
+                <b>Comments</b>${comments}
+              </p>
+              <p class="info-item">
+                <b>Downloads</b>${downloads}
+              </p>
             </div>
+          </div>
             `
-        })
-        .join("");
+        ;
     };
+
+
+    
+    // return data
+    // .map(({ webformatURL, tags, likes, views, comments, downloads}
+
+    // webformatURL - посилання на маленьке зображення для списку карток.
+    // largeImageURL - посилання на велике зображення.
+    // tags - рядок з описом зображення. Підійде для атрибуту alt.
+    // likes - кількість лайків.
+    // views - кількість переглядів.
+    // comments - кількість коментарів.
+    // downloads - кількість завантажень.
+
+
+
+
+// `<div class="countrie">
+// <h2 class="countrie-card-titel"> <img src="${flags.svg}" alt="" width="70" height="50"> ${name.official}</h2>
+// <p>Capital: ${capital}</p>
+// <p>Population: ${population}</p>
+// <p>Languages: ${Object.values(languages)}</p>
+// </div>
+// `
+
     
 //  function createMarkupForMoreThenTwo(data){
 //         return data
