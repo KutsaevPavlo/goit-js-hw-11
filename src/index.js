@@ -30,7 +30,7 @@ function onInput(e){
         // const markupForOne= createMarkup(data);
         
         // console.log(data);
-        console.log(createMarkup(hits[0]));
+        // console.log(createMarkup(hits[0]));
         
         return hits.reduce(
             (markup, hits) => createMarkup(hits) + markup, ""
@@ -43,7 +43,7 @@ function onInput(e){
                 
         // else 
         // addMarkup(countryInfo, markupForOne);
-        }).then((markup) => console.log(markup))
+        }).then((markup) => updateGalleryCards(markup))
         
         .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."));
             
@@ -110,7 +110,12 @@ function onInput(e){
 //     }
     
     
-    
+    // Update markup
+
+    function updateGalleryCards(markup){
+        document.querySelector('.gallery').innerHTML = markup;
+    }
+
 // function addMarkup(element, constMarkup) {
 //         element.insertAdjacentHTML("beforeend", constMarkup);
 //     }
