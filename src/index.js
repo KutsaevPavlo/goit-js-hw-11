@@ -32,7 +32,9 @@ function onInput(e){
         // console.log(data);
         console.log(createMarkup(hits[0]));
         
-        
+        return hits.reduce(
+            (markup, hits) => createMarkup(hits) + markup, ""
+        );
         // if (data.length > 10) {
         // Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
             
@@ -41,7 +43,7 @@ function onInput(e){
                 
         // else 
         // addMarkup(countryInfo, markupForOne);
-        })
+        }).then((markup) => console.log(markup))
         
         .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."));
             
