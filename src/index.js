@@ -7,6 +7,7 @@ import Notiflix from 'notiflix';
 // const _ = require('lodash');
 // const countryList = document.querySelector(".country-list");
 // const countryInfo = document.querySelector(".country-info");
+const galletyList = document.querySelector('.gallery');
 const form = document.getElementById("search-form");
 
 form.addEventListener("submit", onInput);
@@ -19,6 +20,7 @@ function onInput(e){
 
     // cleanerMarkup(countryList);
     // cleanerMarkup(countryInfo);
+    cleanerMarkup(galletyList);
 
     if(inputValue === ''){
         return 
@@ -113,7 +115,7 @@ function onInput(e){
     // Update markup
 
     function updateGalleryCards(markup){
-        document.querySelector('.gallery').innerHTML = markup;
+        galletyList.innerHTML = markup;
     }
 
 // function addMarkup(element, constMarkup) {
@@ -124,9 +126,9 @@ function onInput(e){
 //     //   Cleaner
     
     
-//     function cleanerMarkup(element) {
-//            return  element.innerHTML = '';
-//              }
+    function cleanerMarkup(element) {
+           return  element.innerHTML = '';
+             }
 
 
         
