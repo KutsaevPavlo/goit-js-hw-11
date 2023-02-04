@@ -26,23 +26,23 @@ function onInput(e){
 
     API.AxioSearch(inputValue).then((data) => {
         
-        const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
-        const markupForOne= createMarkup(data);
+        // const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
+        // const markupForOne= createMarkup(data);
         
         console.log(data);
         
         
-        if (data.length > 10) {
-        Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
+        // if (data.length > 10) {
+        // Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
             
-        else if(data.length >= 2 && data.length < 10) {
-        addMarkup(countryList, markupForMoreThenTwo);}
+        // else if(data.length >= 2 && data.length < 10) {
+        // addMarkup(countryList, markupForMoreThenTwo);}
                 
-        else 
-        addMarkup(countryInfo, markupForOne);
+        // else 
+        // addMarkup(countryInfo, markupForOne);
         })
         
-        .catch(error => Notiflix.Notify.failure("Oops, there is no country with that name"));
+        .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."));
             
         };
         
@@ -90,7 +90,7 @@ function onInput(e){
 
         
         //TEST
- API.AxioSearch("cat red").then(console.log);
+//  API.AxioSearch("cat red").then(console.log);
 //  //TEST 2
 //  API.fetchCountries("sw").then((data) => {
 //      console.log(createMarkup(data));
