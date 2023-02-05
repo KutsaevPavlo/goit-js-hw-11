@@ -10,7 +10,7 @@ export default class ImgApi{
         this.queryPage = 1;
         this.searchQuery = "";
         const axios = require('axios');
-        this.countImg = 0;
+        // this.countImg = 0;
     }
     
     async AxioSearch(){
@@ -39,9 +39,9 @@ export default class ImgApi{
     }
     
 
-    resetCountImg() {
-        this.countImg = 0;
-      }    
+    // resetCountImg() {
+    //     this.countImg = 0;
+    //   }    
     
 }
 
