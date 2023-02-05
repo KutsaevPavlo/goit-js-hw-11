@@ -11,7 +11,10 @@ import Notiflix from 'notiflix';
 const galletyList = document.querySelector('.gallery');
 const form = document.getElementById("search-form");
 // const loadMore = document.querySelector('.load-more');
-const loadMore = new LoadMoreBtn('.load-more');
+const loadMore = new LoadMoreBtn({
+  selector: '.load-more',
+  isHiden: true,
+});
 
 // let inputValue = "";
 const imgApi = new ImgApi();
