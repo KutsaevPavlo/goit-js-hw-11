@@ -79,3 +79,8 @@
     padding-top: 10px;
     align-items: center;
   }
+
+
+  button.hidden{
+    display: none;
+  }

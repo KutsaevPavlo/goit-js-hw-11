@@ -13,17 +13,25 @@ export default class ImgApi{
         const axios = require('axios');
     }
     
-    AxioSearch(name){
-    return axios.get(`${ENDPOINT}${MY_API_KEY}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true&per_page=4&page=${this.queryPage}`)
+    async AxioSearch(){
+    return await axios.get(`${ENDPOINT}${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=4&page=${this.queryPage}`)
     .then((response) => {
         if(response.data.totalHits === 0){
             throw new Error(response.statusText);
         }
         return response.data
     }).then((data => {
-        this.queryPage += 1;
+        this.incrementPage();
         return data;
     }));
+    }
+
+    resetPage(){
+        this.queryPage = 1;
+    }
+
+    incrementPage(){
+        this.queryPage += 1;
     }
 
 }
