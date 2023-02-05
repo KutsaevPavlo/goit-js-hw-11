@@ -41,8 +41,8 @@
   }
   
   .photo-card{
-    width: 300px;
-    height: 400px;
+    /* width: 300px; */
+    height: 300px;
     flex-basis: calc((100% - 120px) / 4);
     padding-bottom: 70px;
     /* padding: 40px; */
