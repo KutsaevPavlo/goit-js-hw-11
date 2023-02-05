@@ -45,7 +45,9 @@ function onInput(e){
                 
         // else 
         // addMarkup(countryInfo, markupForOne);
-        }).then((markup) => updateGalleryCards(markup))
+        // }).then((markup) => updateGalleryCards(markup))
+        }).then(updateGalleryCards)
+        .finally(() => form.reset())
         
         .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."));
             
