@@ -11,17 +11,22 @@ export default class ImgApi{
         this.queryPage = 1;
         this.searchQuery = "";
         const axios = require('axios');
+        this.countImg = 0;
     }
     
     async AxioSearch(){
-    return await axios.get(`${ENDPOINT}${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=4&page=${this.queryPage}`)
+    return await axios.get(`${ENDPOINT}${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.queryPage}`)
     .then((response) => {
         if(response.data.totalHits === 0){
             throw new Error(response.statusText);
         }
+        
+        console.log(response.data.totalHits);
         return response.data
     }).then((data => {
         this.incrementPage();
+      
+        
         return data;
     }));
     }
@@ -33,7 +38,12 @@ export default class ImgApi{
     incrementPage(){
         this.queryPage += 1;
     }
+    
 
+    resetCountImg() {
+        this.countImg = 0;
+      }    
+    
 }
 
 
