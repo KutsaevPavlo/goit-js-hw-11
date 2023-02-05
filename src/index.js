@@ -1,4 +1,4 @@
-// import './css/styles.css';
+
 import ImgApi from "./Axio.js"
 import LoadMoreBtn from "./components/LoadMoreBtn.js"
 import Notiflix from 'notiflix';
@@ -7,13 +7,13 @@ import Notiflix from 'notiflix';
 
 const galletyList = document.querySelector('.gallery');
 const form = document.getElementById("search-form");
-// const loadMore = document.querySelector('.load-more');
+
 const loadMore = new LoadMoreBtn({
   selector: '.load-more',
   isHiden: true,
 });
 
-// let inputValue = "";
+
 const imgApi = new ImgApi();
 
 form.addEventListener("submit", onInput);
@@ -74,7 +74,7 @@ function onInput(e){
            
         
         // const { totalHits } =  imgApi.AxioSearch();
-        imgApi.countImg += hits.length;
+        // imgApi.countImg += hits.length;
         // console.log(imgApi.countImg);
         // console.log(imgApi.totalHits);
 
@@ -91,10 +91,7 @@ function onInput(e){
         }).then((markup) =>
         {
         updateGalleryCards(markup);
-        loadMore.enable();
-
-        
-
+        loadMore.enable();      
 
         })
         

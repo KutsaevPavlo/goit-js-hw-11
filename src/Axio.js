@@ -1,10 +1,9 @@
 
 import axios from 'axios';
+
 const MY_API_KEY = '33373070-0a3de92214998aff69d545527'
 const ENDPOINT = "https://pixabay.com/api/?key="
 
-
-// https://pixabay.com/api/?key=33373070-0a3de92214998aff69d545527&q=yellow+flowers&image_type=photo
 
 export default class ImgApi{
     constructor(){
@@ -53,9 +52,3 @@ export default class ImgApi{
 
 
 
-
-// key - твій унікальний ключ доступу до API.
-// q - термін для пошуку. Те, що буде вводити користувач.
-// image_type - тип зображення. На потрібні тільки фотографії, тому постав значення photo.
-// orientation - орієнтація фотографії. Постав значення horizontal.
-// safesearch - фільтр за віком. Постав значення true.
