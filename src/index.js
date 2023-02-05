@@ -79,10 +79,10 @@ function onInput(e){
         // console.log(imgApi.totalHits);
 
 
-        if(imgApi.countImg === imgApi.totalHits){
-          loadMore.disable();
-          Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
-        }
+        // if(imgApi.countImg === imgApi.totalHits){
+        //   loadMore.disable();
+        //   Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
+        // }
 
         return hits.reduce(
             (markup, hits) => createMarkup(hits) + markup, ""
