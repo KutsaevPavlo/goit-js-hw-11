@@ -2,22 +2,35 @@
 import axios from 'axios';
 const MY_API_KEY = '33373070-0a3de92214998aff69d545527'
 const ENDPOINT = "https://pixabay.com/api/?key="
-const axios = require('axios');
+
 
 // https://pixabay.com/api/?key=33373070-0a3de92214998aff69d545527&q=yellow+flowers&image_type=photo
 
-
-function AxioSearch(name){
-return axios.get(`${ENDPOINT}${MY_API_KEY}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true`)
-.then((response) => {
-    if(response.data.totalHits === 0){
-        throw new Error(response.statusText);
+export default class ImgApi{
+    constructor(){
+        this.queryPage = 1;
+        this.searchQuery = "";
+        const axios = require('axios');
     }
-    return response.data
-});
+    
+    AxioSearch(name){
+    return axios.get(`${ENDPOINT}${MY_API_KEY}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true&per_page=4&page=${this.queryPage}`)
+    .then((response) => {
+        if(response.data.totalHits === 0){
+            throw new Error(response.statusText);
+        }
+        return response.data
+    }).then((data => {
+        this.queryPage += 1;
+        return data;
+    }));
+    }
+
 }
 
-export default { AxioSearch };
+
+
+
 
 
 

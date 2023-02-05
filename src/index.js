@@ -1,5 +1,5 @@
 // // import './css/styles.css';
-import API from "./Axio.js"
+import ImgApi from "./Axio.js"
 import Notiflix from 'notiflix';
 
 
@@ -9,24 +9,29 @@ import Notiflix from 'notiflix';
 // const countryInfo = document.querySelector(".country-info");
 const galletyList = document.querySelector('.gallery');
 const form = document.getElementById("search-form");
+const loadMore = document.querySelector('.load-more');
+
+// let inputValue = "";
+const imgApi = new ImgApi();
 
 form.addEventListener("submit", onInput);
+loadMore.addEventListener("click", onLoadMore);
 
 function onInput(e){
     e.preventDefault();
     
-    const inputValue = e.currentTarget.elements.searchQuery.value;
-    console.log(inputValue);
+    imgApi.searchQuery = e.currentTarget.elements.searchQuery.value;
+    console.log(imgApi.searchQuery);
 
     // cleanerMarkup(countryList);
     // cleanerMarkup(countryInfo);
     cleanerMarkup(galletyList);
 
-    if(inputValue === ''){
+    if(imgApi.searchQuery === ''){
         return 
     };   
 
-    API.AxioSearch(inputValue).then(({hits}) => {
+    imgApi.AxioSearch(imgApi.searchQuery).then(({hits}) => {
         
         // const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
         // const markupForOne= createMarkup(data);
@@ -78,29 +83,21 @@ function onInput(e){
 
 
     
-    // return data
-    // .map(({ webformatURL, tags, likes, views, comments, downloads}
 
-    // webformatURL - посилання на маленьке зображення для списку карток.
-    // largeImageURL - посилання на велике зображення.
-    // tags - рядок з описом зображення. Підійде для атрибуту alt.
-    // likes - кількість лайків.
-    // views - кількість переглядів.
-    // comments - кількість коментарів.
-    // downloads - кількість завантажень.
+    function onLoadMore(){
 
+      imgApi.AxioSearch(imgApi.searchQuery).then(({hits}) => {
+                     
+        return hits.reduce(
+            (markup, hits) => createMarkup(hits) + markup, ""
+        );
+       
+        }).then(updateGalleryCards)
+        
+        .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."));
 
-
-
-// `<div class="countrie">
-// <h2 class="countrie-card-titel"> <img src="${flags.svg}" alt="" width="70" height="50"> ${name.official}</h2>
-// <p>Capital: ${capital}</p>
-// <p>Population: ${population}</p>
-// <p>Languages: ${Object.values(languages)}</p>
-// </div>
-// `
-
-    
+    };
+     
 //  function createMarkupForMoreThenTwo(data){
 //         return data
 //         .map(({ name, flags}) => {
@@ -117,7 +114,7 @@ function onInput(e){
     // Update markup
 
     function updateGalleryCards(markup){
-        galletyList.innerHTML = markup;
+        galletyList.insertAdjacentHTML("beforeend", markup);
     }
 
 // function addMarkup(element, constMarkup) {
