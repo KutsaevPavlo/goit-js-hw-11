@@ -25,7 +25,7 @@ export default class ImgApi{
           per_page: 40,
         });
     
-        const response = await axios(
+        const response = await axios.get(
           `${BASE_URL}?${searchParams}&q=${this.searchQuery}&page=${this.queryPage}`
         );
     
