@@ -3,13 +3,13 @@ import axios from 'axios';
 
 const MY_API_KEY = '33373070-0a3de92214998aff69d545527'
 const ENDPOINT = "https://pixabay.com/api/?key="
+const axios = require('axios');
 
 
 export default class ImgApi{
     constructor(){
         this.queryPage = 1;
         this.searchQuery = "";
-        const axios = require('axios');
         // this.countImg = 0;
 
         
