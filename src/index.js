@@ -95,7 +95,7 @@ function onInput(e){
 
         })
         
-        .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."));
+        .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!"));
 
     };
      
