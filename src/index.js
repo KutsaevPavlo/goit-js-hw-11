@@ -13,7 +13,6 @@ const loadMore = new LoadMoreBtn({
   isHiden: true,
 });
 
-
 const imgApi = new ImgApi();
 
 form.addEventListener("submit", onInput);
@@ -40,7 +39,7 @@ function onInput(e){
             
         };
         
-        function createMarkup({ webformatURL, tags, likes, views, comments, downloads}) {
+function createMarkup({ webformatURL, tags, likes, views, comments, downloads}) {
             return `
             <div class="photo-card">
             <img src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -65,25 +64,29 @@ function onInput(e){
 
 
     
+   
 
-    function onLoadMore(){
+function onLoadMore(){
 
       loadMore.disable();
 
-      return imgApi.AxioSearch().then(({hits}) => {
-           
+      return imgApi.AxioSearch()
+      .then((data => {
+         
+        console.log(data.totalHits);
+
+
+
+        chekingTotalHits(imgApi.countImg,data.totalHits)
+
+        return data;
+
+    }))
+            
+      .then(({hits}) => {
+          
+        imgApi.countImg += hits.length;
         
-        // const { totalHits } =  imgApi.AxioSearch();
-        // imgApi.countImg += hits.length;
-        // console.log(imgApi.countImg);
-        // console.log(imgApi.totalHits);
-
-
-        // if(imgApi.countImg === imgApi.totalHits){
-        //   loadMore.disable();
-        //   Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
-        // }
-
         return hits.reduce(
             (markup, hits) => createMarkup(hits) + markup, ""
         );
@@ -103,7 +106,7 @@ function onInput(e){
     
     // Update markup
 
-    function updateGalleryCards(markup){
+function updateGalleryCards(markup){
         galletyList.insertAdjacentHTML("beforeend", markup);
     }
 
@@ -112,9 +115,18 @@ function onInput(e){
 //     //   Cleaner
     
     
-    function cleanerMarkup(element) {
+function cleanerMarkup(element) {
            return  element.innerHTML = '';
              }
 
 
         
+// Controle
+
+function chekingTotalHits(countImg, totalHits){
+  
+        if(countImg === totalHits){
+          loadMore.hide();
+          Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
+        }
+}
