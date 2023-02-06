@@ -11,6 +11,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #fafafa;
+    
     color: #212121;
     line-height: 1.5;
   }
@@ -23,6 +24,7 @@
     
   }
   
+    
   .countrie-card-titel{
     display: flex;
     align-items: center;
@@ -53,6 +55,7 @@
     position: relative;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
       0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+      
   }
   
   
@@ -125,3 +128,13 @@
     justify-content: space-around;
     
   }
+
+  .photo-link{
+    height: 240px;
+    display: block;
+  }
+
+.photo-img{ 
+  width: 100%;
+    max-height: 250px;
+    display: block;}

@@ -2,6 +2,8 @@
 import ImgApi from "./Axio.js"
 import LoadMoreBtn from "./components/LoadMoreBtn.js"
 import Notiflix from 'notiflix';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 
@@ -39,10 +41,12 @@ function onInput(e){
             
         };
         
-function createMarkup({ webformatURL, tags, likes, views, comments, downloads}) {
+function createMarkup({ largeImageURL, webformatURL, tags, likes, views, comments, downloads}) {
             return `
             <div class="photo-card">
-            <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+            <a class='photo-link' href="${largeImageURL }">
+            <img class ="photo-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
+            </a>
             <div class="info">
               <p class="info-item">
                 <b>Likes</b>${likes}
@@ -94,6 +98,7 @@ function onLoadMore(){
         }).then((markup) =>
         {
         updateGalleryCards(markup);
+        
         loadMore.enable();      
 
         })
@@ -108,6 +113,7 @@ function onLoadMore(){
 
 function updateGalleryCards(markup){
         galletyList.insertAdjacentHTML("beforeend", markup);
+        gallery.refresh();
     }
 
 
@@ -131,3 +137,10 @@ function chekingTotalHits(countImg, totalHits){
           Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
         }
 }
+
+let gallery = new SimpleLightbox('.gallery a', { 
+  captionsData: "alt",
+  captionDelay: 250,
+});
+
+// gallery.refrech();
