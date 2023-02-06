@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const MY_API_KEY = '33373070-0a3de92214998aff69d545527'
 const ENDPOINT = "https://pixabay.com/api/?key="
-const axios = require('axios');
+// const axios = require('axios');
 
 
 export default class ImgApi{
@@ -31,12 +31,6 @@ export default class ImgApi{
     
     //     return response.data;
     //   }
-
-
-
-
-
-
 
 
 
