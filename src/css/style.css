@@ -88,3 +88,38 @@
   button.hidden{
     display: none;
   }
+
+  .submitBtn,
+  .load-more{
+     color: black;
+     font-size: 15px;
+     font-family: 'Courier New', Courier, monospace;
+     width: 70px;
+     height: 50px;
+     border-radius: 9px;
+     background-color:#0a0a23;
+      color: #fff;
+     
+  }
+
+  .load-more{
+    margin: auto;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input{
+     
+    height: 50px;
+    border-radius: 9px;
+    border-color:#0a0a23;
+  }
+
+  .search-form{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

@@ -26,5 +26,9 @@ export default class LoadMoreBtn{
         this.button.disabled = true;
         this.button.textContent = "Loading";
     }
+
+    resetCountImg() {
+        this.countImg = 0;
+      }
 }
 

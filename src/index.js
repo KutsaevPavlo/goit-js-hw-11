@@ -127,6 +127,7 @@ function chekingTotalHits(countImg, totalHits){
   
         if(countImg === totalHits){
           loadMore.hide();
+          loadMore.resetCountImg();
           Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
         }
 }
