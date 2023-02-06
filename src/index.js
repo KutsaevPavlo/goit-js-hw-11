@@ -2,7 +2,7 @@
 import ImgApi from "./Axio.js"
 import LoadMoreBtn from "./components/LoadMoreBtn.js"
 import Notiflix from 'notiflix';
-
+import axios from 'axios';
 
 
 const galletyList = document.querySelector('.gallery');
@@ -104,7 +104,7 @@ function onInput(e){
     // Update markup
 
     function updateGalleryCards(markup){
-        return galletyList.insertAdjacentHTML("beforeend", markup);
+        galletyList.insertAdjacentHTML("beforeend", markup);
     }
 
 
