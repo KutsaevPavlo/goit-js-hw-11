@@ -13,8 +13,8 @@ export default class ImgApi{
         // this.countImg = 0;
     }
     
-    async AxioSearch(){
-    return await axios.get(`${ENDPOINT}${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.queryPage}`)
+     AxioSearch(){
+    return  axios.get(`${ENDPOINT}${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.queryPage}`)
     .then((response) => {
         if(response.data.totalHits === 0){
             throw new Error(response.statusText);
