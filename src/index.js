@@ -104,7 +104,7 @@ function onInput(e){
     // Update markup
 
     function updateGalleryCards(markup){
-        galletyList.insertAdjacentHTML("beforeend", markup);
+        return galletyList.insertAdjacentHTML("beforeend", markup);
     }
 
 
