@@ -1,5 +1,5 @@
 
-import ImgApi from "./Axio.js"
+import ImgApi from "./axio.js"
 import LoadMoreBtn from "./components/LoadMoreBtn.js"
 import Notiflix from 'notiflix';
 import SimpleLightbox from "simplelightbox";
@@ -23,13 +23,13 @@ loadMore.button.addEventListener("click", onLoadMore);
 function onInput(e){
     e.preventDefault();
     
-    imgApi.searchQuery = e.currentTarget.elements.searchQuery.value;
+    imgApi.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
     console.log(imgApi.searchQuery);
 
     
     cleanerMarkup(galletyList);
 
-    if(imgApi.searchQuery === ''){
+    if(!imgApi.searchQuery){
         return 
     };   
     imgApi.resetPage();
@@ -70,42 +70,37 @@ function createMarkup({ largeImageURL, webformatURL, tags, likes, views, comment
     
    
 
-function onLoadMore(){
+// function onLoadMore(){
 
-      loadMore.disable();
+//       loadMore.disable();
 
-      return imgApi.AxioSearch()
-      .then((data => {
-         
-        console.log(data.totalHits);
-
-
-
-        chekingTotalHits(imgApi.countImg,data.totalHits)
-
-        return data;
-
-    }))
+//       return imgApi.AxioSearch()
+//       .then((data => {
             
-      .then(({hits}) => {
+//         chekingTotalHits(imgApi.countImg,data.totalHits)
+//         return data;
+
+//     }))
+            
+//       .then(({hits}) => {
           
-        imgApi.countImg += hits.length;
+//         imgApi.countImg += hits.length;
         
-        return hits.reduce(
-            (markup, hits) => createMarkup(hits) + markup, ""
-        );
+//         return hits.reduce(
+//             (markup, hits) => createMarkup(hits) + markup, ""
+//         );
        
-        }).then((markup) =>
-        {
-        updateGalleryCards(markup);
+//         }).then((markup) =>
+//         {
+//         updateGalleryCards(markup);
         
-        loadMore.enable();      
+//         loadMore.enable();      
 
-        })
+//         })
         
-        .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!"));
+//         .catch(error => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!"));
 
-    };
+//     };
      
 
     
@@ -143,4 +138,84 @@ let gallery = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-// gallery.refrech();
+
+
+
+// async function onLoadMore(){
+    
+//     loadMore.disable();
+//     try {
+       
+//         const response = await imgApi.AxioSearch();
+//         console.log(response);
+//         const chekingTotalHitsData = await chekingTotalHits(imgApi.countImg,data.totalHits);
+//         console.log(chekingTotalHitsData);
+//         // return response;
+        
+
+//     //     .then((data => {
+//     //         chekingTotalHits(imgApi.countImg,data.totalHits)  
+            
+//     //       return data;        
+//     //   }))
+              
+//         const nextResponse = await (() => {
+            
+//           imgApi.countImg += hits.length;
+          
+//           return hits.reduce((markup, hits) => createMarkup(hits) + markup, "");         
+//           })
+
+//           return updateGalleryCards(nextResponse);
+//           loadMore.enable(); 
+          
+
+
+// } catch (error) {
+//    Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!");
+
+// }}
+
+
+
+
+
+
+
+async function onLoadMore(){
+    
+    loadMore.disable();
+    try {
+       
+        loadMore.disable();
+
+      return imgApi.AxioSearch()
+      .then((data => {
+            
+        chekingTotalHits(imgApi.countImg,data.totalHits)
+        return data;
+
+    }))
+            
+      .then(({hits}) => {
+          
+        imgApi.countImg += hits.length;
+        
+        return hits.reduce(
+            (markup, hits) => createMarkup(hits) + markup, ""
+        );
+       
+        }).then((markup) =>
+        {
+        updateGalleryCards(markup);
+        
+        loadMore.enable();      
+
+        })
+          
+
+
+} catch (error) {
+   Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!");
+
+}}
