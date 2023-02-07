@@ -141,77 +141,20 @@ let gallery = new SimpleLightbox('.gallery a', {
 
 
 
-// async function onLoadMore(){
-    
-//     loadMore.disable();
-//     try {
-       
-//         const response = await imgApi.AxioSearch();
-//         console.log(response);
-//         const chekingTotalHitsData = await chekingTotalHits(imgApi.countImg,data.totalHits);
-//         console.log(chekingTotalHitsData);
-//         // return response;
-        
-
-//     //     .then((data => {
-//     //         chekingTotalHits(imgApi.countImg,data.totalHits)  
-            
-//     //       return data;        
-//     //   }))
-              
-//         const nextResponse = await (() => {
-            
-//           imgApi.countImg += hits.length;
-          
-//           return hits.reduce((markup, hits) => createMarkup(hits) + markup, "");         
-//           })
-
-//           return updateGalleryCards(nextResponse);
-//           loadMore.enable(); 
-          
-
-
-// } catch (error) {
-//    Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!");
-
-// }}
-
-
-
-
-
-
-
 async function onLoadMore(){
     
     loadMore.disable();
     try {
        
-        loadMore.disable();
-
-      return imgApi.AxioSearch()
-      .then((data => {
-            
-        chekingTotalHits(imgApi.countImg,data.totalHits)
-        return data;
-
-    }))
-            
-      .then(({hits}) => {
-          
+      const { hits, totalHits } = await imgApi.AxioSearch();
+        console.log({ hits, totalHits });
         imgApi.countImg += hits.length;
-        
-        return hits.reduce(
-            (markup, hits) => createMarkup(hits) + markup, ""
-        );
-       
-        }).then((markup) =>
-        {
-        updateGalleryCards(markup);
-        
-        loadMore.enable();      
-
-        })
+        chekingTotalHits(imgApi.countImg, totalHits);
+                  
+        const nextResponse = hits.reduce((markup, hits) => createMarkup(hits) + markup, "");         
+          
+          updateGalleryCards(nextResponse);
+          loadMore.enable(); 
           
 
 
@@ -219,3 +162,47 @@ async function onLoadMore(){
    Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!");
 
 }}
+
+
+
+
+
+
+
+// async function onLoadMore(){
+    
+//     loadMore.disable();
+//     try {
+       
+//         loadMore.disable();
+
+//       return imgApi.AxioSearch()
+//       .then((data => {
+            
+//         chekingTotalHits(imgApi.countImg,data.totalHits)
+//         return data;
+
+//     }))
+            
+//       .then(({hits}) => {
+          
+//         imgApi.countImg += hits.length;
+        
+//         return hits.reduce(
+//             (markup, hits) => createMarkup(hits) + markup, ""
+//         );
+       
+//         }).then((markup) =>
+//         {
+//         updateGalleryCards(markup);
+        
+//         loadMore.enable();      
+
+//         })
+          
+
+
+// } catch (error) {
+//    Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again!");
+
+// }}
